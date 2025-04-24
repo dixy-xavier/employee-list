@@ -1,40 +1,14 @@
-import * as React from "react";
+import { FunctionComponent } from "react";
 import { Select } from "@highlight-ui/select";
 import { Input } from "@highlight-ui/input";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { Position } from "../types";
 
-export const positions = [
-  {
-    label: "Agent",
-    value: "Agent",
-  },
-  {
-    label: "Orchestrator",
-    value: "Orchestrator",
-  },
-  {
-    label: "Technician",
-    value: "Technician",
-  },
-  {
-    label: "Engineer",
-    value: "Engineer",
-  },
-  {
-    label: "Designer",
-    value: "Designer",
-  },
-  {
-    label: "Sales person",
-    value: "Sales person",
-  },
-  {
-    label: "Manager",
-    value: "Manager",
-  },
-];
+type Props = {
+  positions: Position[];
+};
 
-const Filters: React.FunctionComponent = () => {
+const Filters: FunctionComponent<Props> = ({ positions }) => {
   const onPositionFilterChange = (position: string) => {
     console.log("position:", position);
   };

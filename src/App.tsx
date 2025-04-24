@@ -1,10 +1,15 @@
-import * as React from "react";
+import { useMemo, FunctionComponent } from "react";
 import Filters from "./components/Filters";
 import Table from "./components/Table";
 import useApplications from "./useApplications";
+import { getPositions } from "./utils";
+import { Position } from "./types";
 
-const App: React.FunctionComponent = () => {
+const App: FunctionComponent = () => {
   const { data, isLoading } = useApplications();
+  const positions: Position[] = useMemo(() => {
+    return getPositions(data || []);
+  }, [data]);
 
   if (isLoading || !data) {
     return <div>Loading...</div>;
@@ -12,7 +17,7 @@ const App: React.FunctionComponent = () => {
 
   return (
     <div className="App">
-      <Filters />
+      <Filters positions={positions} />
       <Table data={data} />
     </div>
   );

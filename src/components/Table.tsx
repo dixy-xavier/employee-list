@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Tag } from "@highlight-ui/tag";
 import { Table as DSTable } from "@highlight-ui/table";
-import { ApplicationResponse, Status } from "../useApplications";
+import { ApplicationResponse, Status } from "../types";
 import { calculateAge } from "../utils";
 
 const STATUS_COLOR: Record<Status, string> = {

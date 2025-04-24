@@ -1,3 +1,5 @@
+import { ApplicationResponse, Position } from "./types";
+
 export const calculateAge = (birthDate: string) => {
   const today = new Date();
   const birthDateObj = new Date(birthDate);
@@ -9,3 +11,13 @@ export const calculateAge = (birthDate: string) => {
   }
   return age;
 };
+
+export const getPositions = (applications: ApplicationResponse[]) => {
+  const positions = applications.reduce((acc: Position[], application) => {
+    if (!acc.some((pos) => pos.value === application.position_applied)) {
+      acc.push({ label: application.position_applied, value: application.position_applied });
+    }
+    return acc;
+  }, []);
+  return positions; 
+}
