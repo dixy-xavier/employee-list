@@ -6,11 +6,12 @@ import { Position } from "../types";
 
 type Props = {
   positions: Position[];
+  onPositionChange: (position: string) => void;
 };
 
-const Filters: FunctionComponent<Props> = ({ positions }) => {
+const Filters: FunctionComponent<Props> = ({ positions, onPositionChange }) => {
   const onPositionFilterChange = (position: string) => {
-    console.log("position:", position);
+    onPositionChange(position);
   };
   const onSearchChange = (search: string) => {
     console.log("search:", search);
