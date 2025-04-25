@@ -3,25 +3,28 @@ import Filters from "./components/Filters";
 import Table from "./components/Table";
 import useApplications from "./useApplications";
 import { getPositions } from "./utils";
-import { Position } from "./types";
+import { ApplicationResponse, Position } from "./types";
 
 const App: FunctionComponent = () => {
   const [selectedPosition, setSelectedPosition] = useState('');
-  const { data, isLoading } = useApplications(selectedPosition);
+  const [searchText, setSearchText] = useState('');
+
+  const { data, isLoading } = useApplications(selectedPosition, searchText);
   const candidates = data?.candidates || [];
   const filteredCandidates = data?.filteredCandidates || [];
+
   const positions: Position[] = useMemo(() => {
     return getPositions(candidates || []);
   }, [candidates]);
 
-  if (isLoading || !data?.candidates) {
+  if (isLoading || !candidates) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="App">
-      <Filters positions={positions} onPositionChange={setSelectedPosition} />
-      <Table data={filteredCandidates} />
+      <Filters positions={positions} onPositionChange={setSelectedPosition} onSearch={setSearchText} />
+      <Table data={filteredCandidates as ApplicationResponse[]} />
     </div>
   );
 };
